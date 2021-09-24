@@ -11,3 +11,4 @@ A CLI solution built with Python for calculating fitness measurements such as bo
 * [Check Your Health (Caloric Intake)](https://www.checkyourhealth.org/eat-healthy/cal_calculator.php)
 * [Trifecta Nutrition: Daily Water Needs](https://www.trifectanutrition.com/water-intake-calculator#:~:text=Your%20general%20water%20requirements%20can,ounces%20of%20water%20each%20day)
 * [Trifecta Nutrition: Protein Calculator](https://www.trifectanutrition.com/protein-calculator)
+* [Heart Rate Estimate](https://www.healthlinkbc.ca/health-topics/tx4374)

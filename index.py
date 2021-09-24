@@ -4,7 +4,7 @@ def present_main_menu():
     main_menu = [
     inquirer.List('calculation_type',
         message="Which fitness calculation would you like to do?",
-        choices=['Body Mass Index (BMI)', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Resting Heart Rate'],
+        choices=['Body Mass Index (BMI)', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Heart Rate'],
         ),
     ]
     main_menu_answer = inquirer.prompt(main_menu)
@@ -125,7 +125,8 @@ def run_water_calculation():
 
     print('Please note that this is an estimate and may not be entirely accurate.')
 
-# Recommendation is 0.36 - 0.45 grams of protein per pound of body weight; if exercising, then 0.8 to 1.0 gram per pound of body weight
+# Recommendation is 0.36 - 0.45 grams of protein per pound of body weight; 
+# if exercising, then 0.8 to 1.0 gram per pound of body weight
 def run_protein_calculation():
     print('\nYour amount of exercise is a significant factor in determining your recommended daily protein intake.')
     protein_questions = [
@@ -149,6 +150,11 @@ def run_protein_calculation():
     print('\nPlease note that this is an estimate and may not be entirely accurate.')
 
 def run_heart_calculation():
-    print('8')
+    print('\nPlace two fingers on a place where you can feel your pulse (like your wrist and neck). Count the beats for 30 seconds.')
+    heart_question = [inquirer.Text('heartbeats', message="How many heartbeats did you count? Please enter an integer value.")]
+    response = inquirer.prompt(heart_question)
+    response['rate'] = int(response['heartbeats']) * 2
+    print('Your current heart rate is: ' + str(response['rate']))
+    print('\nPlease note that this is an estimate and may not be entirely accurate.')
 
 present_main_menu()
