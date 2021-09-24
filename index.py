@@ -111,7 +111,19 @@ def female_caloric_calculation(user_responses):
     print('\nPlease note that this is a mathematical estimate for approximately how many calories are required to maintain your current body weight. The calculated value may not be entirely accurate. Please consult a healthcare provider when considering significant changes to your daily caloric intake.')
 
 def run_water_calculation():
-    print('6')
+    water_question = [inquirer.Text('weight', message="What is your body weight? Please enter a numeric value in pounds.")]
+    response = inquirer.prompt(water_question)
+    response['min'] = round(int(response['weight']) * 0.5, 2)
+    response['max'] = round(int(response['weight']) * 0.6667, 2)
+    response['min_glasses'] = int(response['min']) / 8
+    response['max_glasses'] = int(response['max']) / 8
+
+    print('\nIt\'s recommended that you drink between ' + str(response['min']) +  
+    ' oz and ' + str(response['max']) + ' oz per day. To put that into perspective, that\'s about ' + 
+    str(response['min_glasses']) + ' to ' + str(response['max_glasses']) + 
+    ' glasses of water per day.')
+
+    print('Please note that this is an estimate and may not be entirely accurate.')
 
 def run_protein_calculation():
     print('7')
