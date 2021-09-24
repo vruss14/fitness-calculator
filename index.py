@@ -4,7 +4,7 @@ def present_main_menu():
     main_menu = [
     inquirer.List('calculation_type',
         message="Which fitness calculation would you like to do?",
-        choices=['Body Mass Index (BMI)', 'Estimated Body Fat Percentage', 'Height Percentile', 'Weight Percentile', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Resting Heart Rate'],
+        choices=['Body Mass Index (BMI)', 'Height Percentile', 'Weight Percentile', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Resting Heart Rate'],
         ),
     ]
     main_menu_answer = inquirer.prompt(main_menu)
@@ -15,8 +15,6 @@ def present_main_menu():
 def choose_sub_menu(user_choice):
     if(user_choice == 'Body Mass Index (BMI)'):
         run_bmi_calculation()
-    elif(user_choice == 'Estimated Body Fat Percentage'):
-        run_bfp_calculation()
     elif(user_choice == 'Height Percentile'):
         run_height_calculation()
     elif(user_choice == 'Weight Percentile'):
@@ -55,9 +53,6 @@ def check_bmi(user_bmi):
         return('According to the CDC, your BMI falls within the overweight range.')
     elif(user_bmi > 30):
         return('According to the CDC, your BMI falls within the obese range.')
-
-def run_bfp_calculation():
-    print('2')
 
 def run_height_calculation():
     print('3')
