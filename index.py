@@ -4,7 +4,7 @@ def present_main_menu():
     main_menu = [
     inquirer.List('calculation_type',
         message="Which fitness calculation would you like to do?",
-        choices=['Body Mass Index (BMI)', 'Height Percentile', 'Weight Percentile', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Resting Heart Rate'],
+        choices=['Body Mass Index (BMI)', 'Estimated Daily Caloric Intake', 'Estimated Daily Water Intake', 'Estimated Daily Protein Intake', 'Resting Heart Rate'],
         ),
     ]
     main_menu_answer = inquirer.prompt(main_menu)
@@ -15,10 +15,6 @@ def present_main_menu():
 def choose_sub_menu(user_choice):
     if(user_choice == 'Body Mass Index (BMI)'):
         run_bmi_calculation()
-    elif(user_choice == 'Height Percentile'):
-        run_height_calculation()
-    elif(user_choice == 'Weight Percentile'):
-        run_weight_calculation()
     elif(user_choice == 'Estimated Daily Caloric Intake'):
         run_caloric_calculation()
     elif(user_choice == 'Estimated Daily Water Intake'):
@@ -54,14 +50,50 @@ def check_bmi(user_bmi):
     elif(user_bmi > 30):
         return('According to the CDC, your BMI falls within the obese range.')
 
-def run_height_calculation():
-    print('3')
-
-def run_weight_calculation():
-    print('4')
-
 def run_caloric_calculation():
-    print('5')
+    print("\nThis calculation differs for men and women, since men tend to have higher basal metabolic rates (BMR) than women.")
+
+    caloric_questions = [
+    inquirer.List('body_type',
+        message="\nKnowing this, which calculation do you feel would be most accurate for you?",
+        choices=['Men', 'Women'],
+        ),
+    inquirer.Text('height', message="What is your height? Please enter a numeric value in inches."),
+    inquirer.Text('weight', message="What is your body weight? Please enter a numeric value in pounds."),
+    inquirer.Text('age', message="What is your age? Please enter an integer value in years."),
+    inquirer.List('exercise',
+        message="How much physical activity would you say that you do each day (on average)?",
+        choices=['Sedentary (little to no exercise)', 'Lightly active (light exercise/sports 1–3 days/week)', 'Moderately active (moderate exercise/sports 3-5 days/week', 'Very active (hard exercise/sports 6-7 days/week', 'Extra active (very hard exercise/sports & physical job or 2x training'],
+        ),               
+    ]
+
+    response = inquirer.prompt(caloric_questions)
+    if(response['body_type'] == 'Men'):
+        male_caloric_calculation(response)
+    else:
+        female_caloric_calculation(response)
+
+def male_caloric_calculation(user_responses):
+
+    # Need to calculate BMR first; then the caloric intake depends on how much exercise the person performs on average each day
+    user_responses['BMR'] = round(66 + (6.3 * int(user_responses['weight'])) + (12.9 * int(user_responses['height'])) - (6.8 * int(user_responses['age'])), 2)
+    
+    if(user_responses['exercise'] == 'Sedentary (little to no exercise)'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.2, 2)
+    elif(user_responses['exercise'] == 'Lightly active (light exercise/sports 1–3 days/week)'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.375, 2)
+    elif(user_responses['exercise'] == 'Moderately active (moderate exercise/sports 3-5 days/week'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.55, 2)
+    elif(user_responses['exercise'] == 'Very active (hard exercise/sports 6-7 days/week'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.725, 2)
+    else:
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.9, 2)
+
+    print('\nYour estimated daily caloric intake is: '+ str(user_responses['caloric_need']) + ' calories.')
+    print('\nPlease note that this is a mathematical estimate for approximately how many calories are required to maintain your current body weight. The calculated value may not be entirely accurate. Please consult a healthcare provider when considering significant changes to your daily caloric intake.')
+
+def female_caloric_calculation(user_responses):
+    print('Stopping at female calc')
 
 def run_water_calculation():
     print('6')
