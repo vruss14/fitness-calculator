@@ -125,8 +125,28 @@ def run_water_calculation():
 
     print('Please note that this is an estimate and may not be entirely accurate.')
 
+# Recommendation is 0.36 - 0.45 grams of protein per pound of body weight; if exercising, then 0.8 to 1.0 gram per pound of body weight
 def run_protein_calculation():
-    print('7')
+    print('\nYour amount of exercise is a significant factor in determining your recommended daily protein intake.')
+    protein_questions = [
+    inquirer.List('exercise',
+        message="\nDo you exercise regularly (moderate/intense activity)?",
+        choices=['Yes', 'No'],
+        ),
+    inquirer.Text('weight', message="What is your body weight? Please enter a numeric value in pounds.")
+    ]
+
+    response = inquirer.prompt(protein_questions)
+
+    if(response['exercise'] == 'Yes'):
+        response['min_protein'] = round(int(response['weight']) * 0.8)
+        response['max_protein'] = round(int(response['weight']))
+    else:
+        response['min_protein'] = round(int(response['weight']) * 0.36)
+        response['max_protein'] = round(int(response['weight']) * 0.45)
+    
+    print('\nYour recommended protein intake is: ' + str(response['min_protein']) + ' – ' + str(response['max_protein']) + ' grams.' )
+    print('\nPlease note that this is an estimate and may not be entirely accurate.')
 
 def run_heart_calculation():
     print('8')

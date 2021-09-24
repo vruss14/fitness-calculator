@@ -10,3 +10,4 @@ A CLI solution built with Python for calculating fitness measurements such as bo
 * [CDC: How to Measure and Interpret Weight Status](https://www.cdc.gov/healthyweight/assessing/index.html)
 * [Check Your Health (Caloric Intake)](https://www.checkyourhealth.org/eat-healthy/cal_calculator.php)
 * [Trifecta Nutrition: Daily Water Needs](https://www.trifectanutrition.com/water-intake-calculator#:~:text=Your%20general%20water%20requirements%20can,ounces%20of%20water%20each%20day)
+* [Trifecta Nutrition: Protein Calculator](https://www.trifectanutrition.com/protein-calculator)
