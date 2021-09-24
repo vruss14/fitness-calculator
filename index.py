@@ -93,7 +93,22 @@ def male_caloric_calculation(user_responses):
     print('\nPlease note that this is a mathematical estimate for approximately how many calories are required to maintain your current body weight. The calculated value may not be entirely accurate. Please consult a healthcare provider when considering significant changes to your daily caloric intake.')
 
 def female_caloric_calculation(user_responses):
-    print('Stopping at female calc')
+    # Calculating BMR
+    user_responses['BMR'] = round(655 + (4.3 * int(user_responses['weight']) + (4.7 * int(user_responses['height']) - (4.7 * int(user_responses['age'])))), 2)
+    
+    if(user_responses['exercise'] == 'Sedentary (little to no exercise)'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.2, 2)
+    elif(user_responses['exercise'] == 'Lightly active (light exercise/sports 1–3 days/week)'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.375, 2)
+    elif(user_responses['exercise'] == 'Moderately active (moderate exercise/sports 3-5 days/week'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.55, 2)
+    elif(user_responses['exercise'] == 'Very active (hard exercise/sports 6-7 days/week'):
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.725, 2)
+    else:
+        user_responses['caloric_need'] = round(int(user_responses['BMR']) * 1.9, 2)
+    
+    print('\nYour estimated daily caloric intake is: '+ str(user_responses['caloric_need']) + ' calories.')
+    print('\nPlease note that this is a mathematical estimate for approximately how many calories are required to maintain your current body weight. The calculated value may not be entirely accurate. Please consult a healthcare provider when considering significant changes to your daily caloric intake.')
 
 def run_water_calculation():
     print('6')
